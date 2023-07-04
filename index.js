@@ -11,6 +11,10 @@ const args = parseArgs({
       type: "string",
       short: "p",
     },
+    base64: {
+      type: "boolean",
+      short: "b",
+    },
   },
   allowPositionals: true,
 });
@@ -34,11 +38,17 @@ wss.on("connection", (ws) => {
   });
 
   ws.on("message", (message) => {
-    child.stdin.write(message);
-    child.stdin.write("\n");
+    if (args.options.base64) {
+      child.stdin.write(message.toString("base64") + "\n");
+    } else {
+      child.stdin.write(message);
+      child.stdin.write("\n");
+    }
   });
 
   child.stdout.on("data", (data) => {
+    data = args.options.base64 ? Buffer.from(data, "base64") : data;
+
     ws.send(data);
   });
 });
