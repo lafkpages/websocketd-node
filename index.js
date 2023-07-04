@@ -46,8 +46,10 @@ wss.on("connection", (ws) => {
     }
   });
 
-  child.stdout.on("data", (data) => {
-    data = args.values.base64 ? Buffer.from(data, "base64") : data;
+  child.stdout.on("data", (dataRaw) => {
+    const data = args.values.base64
+      ? Buffer.from(dataRaw.toString("ascii"), "base64")
+      : dataRaw;
 
     ws.send(data);
   });
