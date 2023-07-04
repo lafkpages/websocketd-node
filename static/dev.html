@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>websocketd-node dev console</title>
+</head>
+<body>
+  <form id="connect-form">
+    <input type="url" name="url" value="ws://localhost:3030" placeholder="ws:// ...">
+    <input type="submit" value="Connect">
+  </form>
+
+  <div id="console">
+    <div id="console-output"></div>
+    <form id="console-input">
+      <input type="text" name="message" placeholder="Enter message">
+      <input type="submit" value="Send">
+    </form>
+  </div>
+</body>
+  <script>
+    const connectForm = document.getElementById('connect-form');
+    const consoleOutput = document.getElementById('console-output');
+    const consoleInput = document.getElementById('console-input');
+
+    let ws = null;
+
+    connectForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      if (ws) {
+        ws.close();
+      }
+
+      ws = new WebSocket(connectForm.url.value);
+
+      ws.onopen = () => {
+        consoleOutput.innerHTML += '<p>Connected</p>';
+      };
+
+      ws.onmessage = async (e) => {
+        consoleOutput.innerHTML += `<p>${await e.data.text()}</p>`;
+      };
+
+      ws.onclose = () => {
+        consoleOutput.innerHTML += '<p>Disconnected</p>';
+      };
+    });
+
+    consoleInput.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      ws.send(e.target.elements.message.value);
+
+      e.target.elements.message.value = '';
+    });
+  </script>
+</html>
