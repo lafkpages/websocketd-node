@@ -1,6 +1,6 @@
 {
   "name": "websocketd-node",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "An implementation of joewalnes/websocketd, in Node.js",
   "main": "index.js",
   "bin": "index.js",
