@@ -62,6 +62,7 @@
       };
 
       ws.onmessage = async (e) => {
+        console.debug('->', e);
         log(await e.data.text());
       };
 
