@@ -3,9 +3,17 @@
 # Simple test script that echoes back what you say,
 # but base64 encodes it first.
 
-while IFS=$'\n' read -r line; do
-  lineDecoded=`base64 -d <<< "$line"`
+i=0
 
-  echo -n "You said: $lineDecoded" | base64
+dir="tests/output"
+
+mkdir -p "$dir"
+
+while IFS=$'\n' read -r line; do
+  base64 -d <<< "$line" > "$dir/$i.bin"
+
+  echo -n "$i" | base64
+
+  ((i++))
 done
 
