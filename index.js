@@ -18,8 +18,19 @@ const wss = new WebSocketServer({
   port: parseInt(args.values.port) || 3030,
 });
 
+const commandName = args.positionals[0];
+const commandArgs = args.positionals.slice(1);
+
 wss.on("connection", (ws) => {
-  const child = spawn(args.positionals, {
+  const child = spawn(commandName, commandArgs, {
     stdio: ["pipe", "pipe", "inherit"],
+  });
+
+  ws.on("message", (message) => {
+    child.stdin.write(message);
+  });
+
+  child.stdout.on("data", (data) => {
+    ws.send(data);
   });
 });
