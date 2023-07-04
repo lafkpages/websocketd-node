@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "An implementation of joewalnes/websocketd, in Node.js",
   "main": "index.js",
+  "bin": "index.js",
   "type": "module",
   "scripts": {
     "test": "node . ./tests/test.sh",
