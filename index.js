@@ -18,6 +18,8 @@ const wss = new WebSocketServer({
   port: parseInt(args.values.port) || 3030,
 });
 
+console.debug("Listening on port", wss.options.port);
+
 const commandName = args.positionals[0];
 const commandArgs = args.positionals.slice(1);
 
