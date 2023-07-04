@@ -77,5 +77,10 @@
 
       e.target.elements.message.value = '';
     });
+
+    // Autocomplete port from URL
+    if (window.location.hash) {
+      connectForm.url.value = `ws://localhost:${window.location.hash.slice(1)}`;
+    }
   </script>
 </html>

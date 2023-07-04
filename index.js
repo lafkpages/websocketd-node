@@ -20,7 +20,10 @@ const wss = new WebSocketServer({
 });
 
 console.debug("Listening on port", wss.options.port);
-console.debug("Dev console at", `${dirname(import.meta.url)}/static/dev.html`);
+console.debug(
+  "Dev console at",
+  `${dirname(import.meta.url)}/static/dev.html#${wss.options.port}`
+);
 
 const commandName = args.positionals[0];
 const commandArgs = args.positionals.slice(1);
