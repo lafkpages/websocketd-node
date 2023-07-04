@@ -1,0 +1,27 @@
+{
+  "name": "websocketd-node",
+  "version": "0.0.1",
+  "description": "An implementation of joewalnes/websocketd, in Node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lafkpages/websocketd-node.git"
+  },
+  "keywords": [
+    "websocketd",
+    "stdin",
+    "stdout",
+    "bash",
+    "wrapper",
+    "websocket"
+  ],
+  "author": "LuisAFK",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/lafkpages/websocketd-node/issues"
+  },
+  "homepage": "https://github.com/lafkpages/websocketd-node#readme"
+}
