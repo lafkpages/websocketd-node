@@ -32,6 +32,7 @@ wss.on("connection", (ws) => {
 
   ws.on("message", (message) => {
     child.stdin.write(message);
+    child.stdin.write("\n");
   });
 
   child.stdout.on("data", (data) => {
