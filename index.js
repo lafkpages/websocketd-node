@@ -7,6 +7,10 @@ import { dirname } from "path";
 
 const args = parseArgs({
   options: {
+    help: {
+      type: "boolean",
+      short: "h",
+    },
     port: {
       type: "string",
       short: "p",
@@ -18,6 +22,28 @@ const args = parseArgs({
   },
   allowPositionals: true,
 });
+
+function usage() {
+  console.log(
+    `
+Usage: websocket-node [options] <command> [args...]
+
+<command>         The command to run per connection.
+[args...]         Arguments to pass to the command.
+
+Options:
+  -h, --help      Show this help message and exit.
+  -p, --port      Port to listen on. Defaults to 3030.
+  -b, --base64    Encode/decode stdin/stdout as base64.
+`.trim()
+  );
+
+  process.exit(0);
+}
+
+if (args.values.help) {
+  usage();
+}
 
 const wss = new WebSocketServer({
   port: parseInt(args.values.port) || 3030,
