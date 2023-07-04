@@ -26,6 +26,18 @@
 
     let ws = null;
 
+    function log(msg, system = false) {
+      const log = document.createElement('p');
+
+      log.textContent = msg;
+
+      if (system) {
+        log.classList.add('system');
+      }
+
+      consoleOutput.appendChild(log);
+    }
+
     connectForm.addEventListener('submit', (e) => {
       e.preventDefault();
 
@@ -36,15 +48,15 @@
       ws = new WebSocket(connectForm.url.value);
 
       ws.onopen = () => {
-        consoleOutput.innerHTML += '<p>Connected</p>';
+        log('Connected', true);
       };
 
       ws.onmessage = async (e) => {
-        consoleOutput.innerHTML += `<p>${await e.data.text()}</p>`;
+        log(await e.data.text());
       };
 
       ws.onclose = () => {
-        consoleOutput.innerHTML += '<p>Disconnected</p>';
+        log('Disconnected', true);
       };
     });
 
