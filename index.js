@@ -3,6 +3,7 @@
 import { WebSocketServer } from "ws";
 import { parseArgs } from "util";
 import { spawn } from "child_process";
+import { dirname } from "path";
 
 const args = parseArgs({
   options: {
@@ -19,6 +20,7 @@ const wss = new WebSocketServer({
 });
 
 console.debug("Listening on port", wss.options.port);
+console.debug("Dev console at", `${dirname(import.meta.url)}/static/dev.html`);
 
 const commandName = args.positionals[0];
 const commandArgs = args.positionals.slice(1);
