@@ -5,6 +5,12 @@
   "main": "index.js",
   "bin": "index.js",
   "type": "module",
+  "files": [
+    "index.js",
+    "LICENSE",
+    "README.md",
+    "static"
+  ],
   "scripts": {
     "test": "node . ./tests/test.sh",
     "test:base64": "node . -b ./tests/test:base64.sh",
