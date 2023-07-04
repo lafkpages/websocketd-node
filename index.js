@@ -38,7 +38,7 @@ wss.on("connection", (ws) => {
   });
 
   ws.on("message", (message) => {
-    if (args.options.base64) {
+    if (args.values.base64) {
       child.stdin.write(message.toString("base64") + "\n");
     } else {
       child.stdin.write(message);
@@ -47,7 +47,7 @@ wss.on("connection", (ws) => {
   });
 
   child.stdout.on("data", (data) => {
-    data = args.options.base64 ? Buffer.from(data, "base64") : data;
+    data = args.values.base64 ? Buffer.from(data, "base64") : data;
 
     ws.send(data);
   });
