@@ -23,5 +23,8 @@
   "bugs": {
     "url": "https://github.com/lafkpages/websocketd-node/issues"
   },
-  "homepage": "https://github.com/lafkpages/websocketd-node#readme"
+  "homepage": "https://github.com/lafkpages/websocketd-node#readme",
+  "dependencies": {
+    "ws": "^8.13.0"
+  }
 }
