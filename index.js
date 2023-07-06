@@ -19,6 +19,10 @@ const args = parseArgs({
       type: "boolean",
       short: "b",
     },
+    devconsole: {
+      type: "boolean",
+      short: "d",
+    },
   },
   allowPositionals: true,
 });
@@ -58,10 +62,13 @@ const wss = new WebSocketServer({
 });
 
 console.debug("Listening on port", wss.options.port);
-console.debug(
-  "Dev console at",
-  `${dirname(import.meta.url)}/static/dev.html#${wss.options.port}\n`
-);
+if (args.values.devconsole) {
+  console.debug(
+    "Dev console at",
+    `${dirname(import.meta.url)}/static/dev.html#${wss.options.port}`
+  );
+}
+console.debug("");
 
 wss.on("connection", (ws) => {
   const child = spawn(commandName, commandArgs, {

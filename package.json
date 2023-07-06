@@ -1,6 +1,6 @@
 {
   "name": "websocketd-node",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "An implementation of joewalnes/websocketd, in Node.js",
   "main": "index.js",
   "bin": "index.js",
@@ -12,8 +12,8 @@
     "static"
   ],
   "scripts": {
-    "test": "node . ./tests/test.sh",
-    "test:base64": "node . -b ./tests/test:base64.sh",
+    "test": "node . -d ./tests/test.sh",
+    "test:base64": "node . -db ./tests/test:base64.sh",
     "format": "prettier --write ."
   },
   "repository": {
