@@ -45,6 +45,14 @@ if (args.values.help) {
   usage();
 }
 
+const commandName = args.positionals[0];
+const commandArgs = args.positionals.slice(1);
+
+if (!commandName) {
+  console.error("Error: missing <command> argument.\n");
+  usage();
+}
+
 const wss = new WebSocketServer({
   port: parseInt(args.values.port) || 3030,
 });
@@ -54,9 +62,6 @@ console.debug(
   "Dev console at",
   `${dirname(import.meta.url)}/static/dev.html#${wss.options.port}`
 );
-
-const commandName = args.positionals[0];
-const commandArgs = args.positionals.slice(1);
 
 wss.on("connection", (ws) => {
   const child = spawn(commandName, commandArgs, {
