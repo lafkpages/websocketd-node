@@ -60,7 +60,7 @@ const wss = new WebSocketServer({
 console.debug("Listening on port", wss.options.port);
 console.debug(
   "Dev console at",
-  `${dirname(import.meta.url)}/static/dev.html#${wss.options.port}`
+  `${dirname(import.meta.url)}/static/dev.html#${wss.options.port}\n`
 );
 
 wss.on("connection", (ws) => {
