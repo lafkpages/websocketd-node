@@ -32,13 +32,14 @@ function usage() {
     `
 Usage: websocket-node [options] <command> [args...]
 
-<command>         The command to run per connection.
-[args...]         Arguments to pass to the command.
+<command>           The command to run per connection.
+[args...]           Arguments to pass to the command.
 
 Options:
-  -h, --help      Show this help message and exit.
-  -p, --port      Port to listen on. Defaults to 3030.
-  -b, --base64    Encode/decode stdin/stdout as base64.
+  -h, --help        Show this help message and exit.
+  -p, --port        Port to listen on. Defaults to 3030.
+  -b, --base64      Encode/decode stdin/stdout as base64.
+  -d, --devconsole  Show a dev console URL on startup.
 `.trim()
   );
 
