@@ -1,54 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>websocketd-node dev console</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>websocketd-node dev console</title>
 
-  <style>
-    #console-output p {
-      font-family: monospace;
-    }
+    <style>
+      #console-output p {
+        font-family: monospace;
+      }
 
-    #console-output p.system {
-      font-style: italic;
-    }
-  </style>
-</head>
-<body>
-  <form id="connect-form">
-    <input type="url" name="url" value="ws://localhost:3030" placeholder="ws:// ...">
-    <input type="submit" value="Connect">
-  </form>
-
-  <div id="console">
-    <div id="console-output"></div>
-    <form id="console-input">
-      <input type="text" name="message" placeholder="Enter message">
-      <input type="submit" value="Send">
+      #console-output p.system {
+        font-style: italic;
+      }
+    </style>
+  </head>
+  <body>
+    <form id="connect-form">
+      <input
+        type="url"
+        name="url"
+        value="ws://localhost:3030"
+        placeholder="ws:// ..."
+      />
+      <input type="submit" value="Connect" />
     </form>
-  </div>
-</body>
+
+    <div id="console">
+      <div id="console-output"></div>
+      <form id="console-input">
+        <input type="text" name="message" placeholder="Enter message" />
+        <input type="submit" value="Send" />
+      </form>
+    </div>
+  </body>
   <script>
-    const connectForm = document.getElementById('connect-form');
-    const consoleOutput = document.getElementById('console-output');
-    const consoleInput = document.getElementById('console-input');
+    const connectForm = document.getElementById("connect-form");
+    const consoleOutput = document.getElementById("console-output");
+    const consoleInput = document.getElementById("console-input");
 
     let ws = null;
 
     function log(msg, system = false) {
-      const log = document.createElement('p');
+      const log = document.createElement("p");
 
       log.textContent = msg;
 
       if (system) {
-        log.classList.add('system');
+        log.classList.add("system");
       }
 
       consoleOutput.appendChild(log);
     }
 
-    connectForm.addEventListener('submit', (e) => {
+    connectForm.addEventListener("submit", (e) => {
       e.preventDefault();
 
       if (ws) {
@@ -58,25 +63,25 @@
       ws = new WebSocket(connectForm.url.value);
 
       ws.onopen = () => {
-        log('Connected', true);
+        log("Connected", true);
       };
 
       ws.onmessage = async (e) => {
-        console.debug('->', e);
+        console.debug("->", e);
         log(await e.data.text());
       };
 
       ws.onclose = () => {
-        log('Disconnected', true);
+        log("Disconnected", true);
       };
     });
 
-    consoleInput.addEventListener('submit', (e) => {
+    consoleInput.addEventListener("submit", (e) => {
       e.preventDefault();
 
       ws.send(e.target.elements.message.value);
 
-      e.target.elements.message.value = '';
+      e.target.elements.message.value = "";
     });
 
     // Autocomplete port from URL
